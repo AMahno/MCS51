@@ -1,0 +1,45 @@
+A51 MACRO ASSEMBLER  MAIN                                                                 04/14/2018 23:51:02 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\main.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE main.a51 SET(SMALL) DEBUG PRINT(.\Listings\main.lst) OBJECT(.\Objects\m
+                      ain.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000 7401              1             mov a, #1
+0002 900256            2             mov dptr, #256h
+                       3             
+0005 758961            4             mov TMOD, #01100001b
+0008 758C03            5             mov TH0, #HIGH (1000-1)
+000B 758AE7            6             mov TL0, #LOW (1000-1)
+                       7             
+000E D28C              8             setb TR0
+                       9             
+0010 308DFD           10             wait: jnb TF0, wait
+0013 23               11             rl a
+0014 F0               12             movx @dptr, a
+0015 80F9             13             jmp wait
+                      14             
+                      15             end
+A51 MACRO ASSEMBLER  MAIN                                                                 04/14/2018 23:51:02 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+TF0. . . . . . . .  B ADDR   0088H.5 A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+WAIT . . . . . . .  C ADDR   0010H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

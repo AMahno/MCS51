@@ -1,0 +1,100 @@
+A51 MACRO ASSEMBLER  MAIIN                                                                04/10/2018 11:36:53 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\maiin.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE maiin.a51 SET(SMALL) DEBUG PRINT(.\Listings\maiin.lst) OBJECT(.\Objects
+                      \maiin.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1             org 0000h
+                       2             
+0000 3080FD            3             wait: jnb p0.0, wait    
+                       4             
+0003 7820              5             mov r0, #20h  
+0005 900256            6             mov dptr, #256h  
+                       7             
+0008                   8             loop_start:     
+0008 E6                9             mov a, @r0
+                      10                     
+0009 7904             11             mov r1, #4  
+000B 7A01             12             mov r2, #1  
+000D FB               13             mov r3, a  
+000E 7C00             14             mov r4, #0  
+                      15             
+0010                  16             cmp_loop_1:
+0010 5A               17             anl a, r2  
+0011 6001             18             jz zero_1
+0013 0C               19             inc r4  
+0014                  20             zero_1:
+0014 EA               21             mov a, r2  
+0015 23               22             rl a
+0016 FA               23             mov r2, a
+0017 EB               24             mov a, r3  
+0018 D9F6             25             djnz r1, cmp_loop_1
+                      26             
+                      27             
+001A C4               28             swap a  
+                      29             
+001B 7904             30             mov r1, #4  
+001D 7A01             31             mov r2, #1  
+001F FB               32             mov r3, a  
+0020 7D00             33             mov r5, #0  
+                      34                     
+0022                  35             cmp_loop_2:
+0022 5A               36             anl a, r2
+0023 6001             37             jz zero_2
+0025 0D               38             inc r5
+0026                  39             zero_2:
+0026 EA               40             mov a, r2
+0027 23               41             rl a
+0028 FA               42             mov r2, a
+0029 EB               43             mov a, r3  
+002A D9F6             44             djnz r1, cmp_loop_2
+                      45             
+002C ED               46             mov a, r5  
+002D 6C               47             xrl a, r4
+002E 600F             48             jz end_mark
+0030 EB               49             mov a, r3
+0031 C4               50             swap a
+                      51             
+0032 540F             52             anl a, #00Fh  
+0034 F9               53             mov r1, a
+0035 E6               54             mov a, @r0
+0036 54F0             55             anl a, #0F0h
+0038 C4               56             swap a
+0039 29               57             add a, r1
+A51 MACRO ASSEMBLER  MAIIN                                                                04/10/2018 11:36:53 PAGE     2
+
+                      58                     
+003A F0               59             movx @dptr, a
+003B 08               60             inc r0
+003C A3               61             inc dptr
+                      62             
+003D 80C9             63             jmp loop_start
+                      64             
+003F                  65             end_mark:
+                      66             end
+A51 MACRO ASSEMBLER  MAIIN                                                                04/10/2018 11:36:53 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+CMP_LOOP_1 . . . .  C ADDR   0010H   A   
+CMP_LOOP_2 . . . .  C ADDR   0022H   A   
+END_MARK . . . . .  C ADDR   003FH   A   
+LOOP_START . . . .  C ADDR   0008H   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+WAIT . . . . . . .  C ADDR   0000H   A   
+ZERO_1 . . . . . .  C ADDR   0014H   A   
+ZERO_2 . . . . . .  C ADDR   0026H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
