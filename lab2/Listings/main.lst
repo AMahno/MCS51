@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  MAIN                                                                 04/14/2018 23:51:02 PAGE     1
+A51 MACRO ASSEMBLER  MAIN                                                                 04/17/2018 12:18:06 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.2.7.0
@@ -8,22 +8,37 @@ ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE main.a51 SET(SMALL) DEBUG PRINT
 
 LOC  OBJ            LINE     SOURCE
 
-0000 7401              1             mov a, #1
-0002 900256            2             mov dptr, #256h
-                       3             
-0005 758961            4             mov TMOD, #01100001b
-0008 758C03            5             mov TH0, #HIGH (1000-1)
-000B 758AE7            6             mov TL0, #LOW (1000-1)
+0000                   1             org 0
+                       2             
+0000 7401              3             mov a, #1
+0002 7800              4             mov r0, #0
+0004 758961            5             mov TMOD, #01100001b
+0007 D28C              6             setb TR0
                        7             
-000E D28C              8             setb TR0
-                       9             
-0010 308DFD           10             wait: jnb TF0, wait
-0013 23               11             rl a
-0014 F0               12             movx @dptr, a
-0015 80F9             13             jmp wait
+0009 308DFD            8             wait: jnb TF0, wait
+000C C28D              9             clr TF0
+                      10             
+000E 23               11             rl a
+000F 90A006           12             mov dptr, #0A006h
+0012 F0               13             movx @dptr, a
                       14             
-                      15             end
-A51 MACRO ASSEMBLER  MAIN                                                                 04/14/2018 23:51:02 PAGE     2
+0013 F9               15             mov r1, a
+                      16             
+0014 B80802           17             cjne r0, #8, not_equals
+0017 7800             18             mov r0, #0
+0019                  19             not_equals:
+0019 08               20             inc r0
+                      21                     
+001A E8               22             mov a, r0       
+001B 90A000           23             mov dptr, #0A000h
+001E F0               24             movx @dptr, a
+                      25             
+001F E9               26             mov a, r1
+                      27                     
+0020 80E7             28             jmp wait
+                      29             
+                      30             end
+A51 MACRO ASSEMBLER  MAIN                                                                 04/17/2018 12:18:06 PAGE     2
 
 SYMBOL TABLE LISTING
 ------ ----- -------
@@ -31,12 +46,11 @@ SYMBOL TABLE LISTING
 
 N A M E             T Y P E  V A L U E   ATTRIBUTES
 
+NOT_EQUALS . . . .  C ADDR   0019H   A   
 TF0. . . . . . . .  B ADDR   0088H.5 A   
-TH0. . . . . . . .  D ADDR   008CH   A   
-TL0. . . . . . . .  D ADDR   008AH   A   
 TMOD . . . . . . .  D ADDR   0089H   A   
 TR0. . . . . . . .  B ADDR   0088H.4 A   
-WAIT . . . . . . .  C ADDR   0010H   A   
+WAIT . . . . . . .  C ADDR   0009H   A   
 
 
 REGISTER BANK(S) USED: 0 

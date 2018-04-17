@@ -1,15 +1,30 @@
+	org 0
+	
 	mov a, #1
-	mov dptr, #256h
-	
+	mov r0, #0
 	mov TMOD, #01100001b
-	mov TH0, #HIGH (1000-1)
-	mov TL0, #LOW (1000-1)
-	
 	setb TR0
 	
 	wait: jnb TF0, wait
+	clr TF0
+	
 	rl a
+	mov dptr, #0A006h
 	movx @dptr, a
+	
+	mov r1, a
+	
+	cjne r0, #8, not_equals
+	mov r0, #0
+	not_equals:
+	inc r0
+		
+	mov a, r0	
+	mov dptr, #0A000h
+	movx @dptr, a
+	
+	mov a, r1
+		
 	jmp wait
 	
 	end

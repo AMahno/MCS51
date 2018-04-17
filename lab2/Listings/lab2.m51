@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    04/14/2018  23:51:02  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    04/17/2018  12:18:06  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
@@ -19,7 +19,7 @@ LINK MAP OF MODULE:  .\Objects\lab2 (MAIN)
             REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
-            CODE    0000H     0017H     ABSOLUTE     
+            CODE    0000H     0022H     ABSOLUTE     
 
 
 
@@ -29,27 +29,37 @@ SYMBOL TABLE OF MODULE:  .\Objects\lab2 (MAIN)
   ----------------------------------
 
   -------         MODULE        MAIN
+  C:0019H         SYMBOL        NOT_EQUALS
   B:0088H.5       SYMBOL        TF0
-  D:008CH         SYMBOL        TH0
-  D:008AH         SYMBOL        TL0
   D:0089H         SYMBOL        TMOD
   B:0088H.4       SYMBOL        TR0
-  C:0010H         SYMBOL        WAIT
-  C:0000H         LINE#         65533
-  C:0002H         LINE#         2
-  C:0005H         LINE#         4
-  C:0008H         LINE#         5
-  C:000BH         LINE#         6
-  C:000EH         LINE#         8
-  C:0010H         LINE#         10
-  C:0013H         LINE#         11
-  C:0014H         LINE#         12
-  C:0015H         LINE#         13
+  C:0009H         SYMBOL        WAIT
+  C:0000H         LINE#         3
+  C:0002H         LINE#         4
+  C:0004H         LINE#         5
+  C:0007H         LINE#         6
+  C:0009H         LINE#         8
+  C:000CH         LINE#         9
+  C:000EH         LINE#         11
+  C:000FH         LINE#         12
+  C:0012H         LINE#         13
+  C:0013H         LINE#         15
+  C:0014H         LINE#         17
+  C:0017H         LINE#         18
+  C:0019H         LINE#         20
+  C:001AH         LINE#         22
+  C:001BH         LINE#         23
+  C:001EH         LINE#         24
+  C:001FH         LINE#         26
+  C:0020H         LINE#         28
   -------         ENDMOD        MAIN
 
 ******************************************************************************
-* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0017H BYTE ( 1%) *
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0022H BYTE ( 1%) *
 ******************************************************************************
 
-Program Size: data=8.0 xdata=0 code=23
+Program Size: data=8.0 xdata=0 code=34
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  04/17/2018  12:18:06  PAGE 2
+
+
 LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
