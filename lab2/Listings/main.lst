@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  MAIN                                                                 04/17/2018 12:18:06 PAGE     1
+A51 MACRO ASSEMBLER  MAIN                                                                 04/17/2018 13:31:36 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.2.7.0
@@ -12,33 +12,56 @@ LOC  OBJ            LINE     SOURCE
                        2             
 0000 7401              3             mov a, #1
 0002 7800              4             mov r0, #0
-0004 758961            5             mov TMOD, #01100001b
-0007 D28C              6             setb TR0
-                       7             
-0009 308DFD            8             wait: jnb TF0, wait
-000C C28D              9             clr TF0
-                      10             
-000E 23               11             rl a
-000F 90A006           12             mov dptr, #0A006h
-0012 F0               13             movx @dptr, a
-                      14             
-0013 F9               15             mov r1, a
+0004 7A00              5             mov r2, #0
+0006 7B00              6             mov r3, #0
+0008 758961            7             mov TMOD, #01100001b
+000B D28C              8             setb TR0
+                       9                     
+000D 308DFD           10             wait: jnb TF0, wait
+0010 C28D             11             clr TF0
+                      12             
+0012 23               13             rl a
+0013 90A006           14             mov dptr, #0A006h
+0016 F0               15             movx @dptr, a
                       16             
-0014 B80802           17             cjne r0, #8, not_equals
-0017 7800             18             mov r0, #0
-0019                  19             not_equals:
-0019 08               20             inc r0
-                      21                     
-001A E8               22             mov a, r0       
-001B 90A000           23             mov dptr, #0A000h
-001E F0               24             movx @dptr, a
-                      25             
-001F E9               26             mov a, r1
-                      27                     
-0020 80E7             28             jmp wait
-                      29             
-                      30             end
-A51 MACRO ASSEMBLER  MAIN                                                                 04/17/2018 12:18:06 PAGE     2
+0017 F9               17             mov r1, a
+                      18             
+0018 B80802           19             cjne r0, #8, not_equals
+001B 7800             20             mov r0, #0
+001D                  21             not_equals:
+001D 08               22             inc r0
+                      23                     
+001E E8               24             mov a, r0       
+                      25     
+001F BA0F02           26             cjne r2, #0Fh, not_eq_swap
+0022 7B00             27             mov r3, #0
+0024                  28             not_eq_swap:
+                      29                     
+0024 BA1E04           30             cjne r2, #1Eh, not_eq_swap2
+0027 7B01             31             mov r3, #1
+0029 7A00             32             mov r2, #0
+002B                  33             not_eq_swap2:
+                      34             
+002B BB0101           35             cjne r3, #1, swapping
+002E C4               36             swap a
+002F                  37             swapping:
+                      38             
+002F 0A               39             inc r2
+                      40             
+0030 90A000           41             mov dptr, #0A000h
+0033 F0               42             movx @dptr, a
+                      43             
+0034 C4               44             swap a
+0035 90B000           45             mov dptr, #0B000h
+0038 F0               46             movx @dptr, a
+0039 C4               47             swap a
+                      48             
+003A E9               49             mov a, r1
+                      50                     
+003B 80D0             51             jmp wait
+                      52             
+                      53             end
+A51 MACRO ASSEMBLER  MAIN                                                                 04/17/2018 13:31:36 PAGE     2
 
 SYMBOL TABLE LISTING
 ------ ----- -------
@@ -46,11 +69,14 @@ SYMBOL TABLE LISTING
 
 N A M E             T Y P E  V A L U E   ATTRIBUTES
 
-NOT_EQUALS . . . .  C ADDR   0019H   A   
+NOT_EQUALS . . . .  C ADDR   001DH   A   
+NOT_EQ_SWAP. . . .  C ADDR   0024H   A   
+NOT_EQ_SWAP2 . . .  C ADDR   002BH   A   
+SWAPPING . . . . .  C ADDR   002FH   A   
 TF0. . . . . . . .  B ADDR   0088H.5 A   
 TMOD . . . . . . .  D ADDR   0089H   A   
 TR0. . . . . . . .  B ADDR   0088H.4 A   
-WAIT . . . . . . .  C ADDR   0009H   A   
+WAIT . . . . . . .  C ADDR   000DH   A   
 
 
 REGISTER BANK(S) USED: 0 
