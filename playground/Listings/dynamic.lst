@@ -1,0 +1,80 @@
+A51 MACRO ASSEMBLER  DYNAMIC                                                              04/27/2018 22:30:39 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\dynamic.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE dynamic.a51 SET(SMALL) DEBUG PRINT(.\Listings\dynamic.lst) OBJECT(.\Obj
+                      ects\dynamic.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1             org 0h
+0000 020030            2             ljmp main
+                       3             
+000B                   4             org 000Bh
+000B 113F              5             call isr
+000D 32                6             reti
+                       7             
+                       8             
+0030                   9             org 30h
+0030                  10             main:
+0030 C2AF             11             clr ea;
+0032 C28C             12             clr tr0;
+0034 758961           13             mov TMOD, #01100001b
+                      14             ;clr pt0;
+0037 D2AF             15             setb ea;
+0039 D2A9             16             setb et0;
+003B D28C             17             setb tr0;
+                      18             
+                      19             
+                      20             
+                      21     
+                      22     
+                      23     
+                      24     
+                      25     
+                      26     
+                      27     
+003D                  28             loop:
+003D 80FE             29             jmp loop
+                      30             
+003F                  31             isr:
+003F FD               32             mov r5, a
+0040 EE               33             mov a, r6
+0041 6404             34             xrl a, #4h
+0043 7002             35             jnz not_equals
+0045 7E00             36             mov r6, #0h
+0047                  37             not_equals:
+0047 0E               38             inc r6
+0048 EE               39             mov a, r6
+0049 908002           40             mov dptr, #8002h
+004C F0               41             movx @dptr, a
+004D 908001           42             mov dptr, #8001h
+0050 740F             43             mov a, #0Fh
+0052 F0               44             movx @dptr, a
+0053 ED               45             mov a, r5
+0054 22               46             ret
+                      47             end
+                                     
+A51 MACRO ASSEMBLER  DYNAMIC                                                              04/27/2018 22:30:39 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+ET0. . . . . . . .  B ADDR   00A8H.1 A   
+ISR. . . . . . . .  C ADDR   003FH   A   
+LOOP . . . . . . .  C ADDR   003DH   A   
+MAIN . . . . . . .  C ADDR   0030H   A   
+NOT_EQUALS . . . .  C ADDR   0047H   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

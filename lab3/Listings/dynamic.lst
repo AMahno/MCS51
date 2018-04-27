@@ -1,0 +1,36 @@
+A51 MACRO ASSEMBLER  DYNAMIC                                                              04/24/2018 11:07:16 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\dynamic.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE dynamic.a51 SET(SMALL) DEBUG PRINT(.\Listings\dynamic.lst) OBJECT(.\Obj
+                      ects\dynamic.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0030                   1             org 30h
+0030 908002            2             mov dptr, #8002h
+0033 7400              3             mov a, #00h
+0035 F0                4             movx @dptr, a
+0036 908001            5             mov dptr, #8001h
+0039 E5FF              6             mov a, 0ffh
+003B F0                7             movx @dptr, a
+003C                   8             loop:
+003C 80FE              9             jmp loop
+                      10             end
+                                     
+A51 MACRO ASSEMBLER  DYNAMIC                                                              04/24/2018 11:07:16 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+LOOP . . . . . . .  C ADDR   003CH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

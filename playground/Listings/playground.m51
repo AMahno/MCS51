@@ -1,0 +1,74 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    04/27/2018  22:30:40  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\dynamic.obj TO .\Objects\playground PRINT (.\Listings\playground.m51)
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\dynamic.obj (DYNAMIC)
+
+
+LINK MAP OF MODULE:  .\Objects\playground (DYNAMIC)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0055H     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\playground (DYNAMIC)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        DYNAMIC
+  B:00A8H.7       SYMBOL        EA
+  B:00A8H.1       SYMBOL        ET0
+  C:003FH         SYMBOL        ISR
+  C:003DH         SYMBOL        LOOP
+  C:0030H         SYMBOL        MAIN
+  C:0047H         SYMBOL        NOT_EQUALS
+  D:0089H         SYMBOL        TMOD
+  B:0088H.4       SYMBOL        TR0
+  C:0000H         LINE#         2
+  C:000BH         LINE#         5
+  C:000DH         LINE#         6
+  C:0030H         LINE#         11
+  C:0032H         LINE#         12
+  C:0034H         LINE#         13
+  C:0037H         LINE#         15
+  C:0039H         LINE#         16
+  C:003BH         LINE#         17
+  C:003DH         LINE#         29
+  C:003FH         LINE#         32
+  C:0040H         LINE#         33
+  C:0041H         LINE#         34
+  C:0043H         LINE#         35
+  C:0045H         LINE#         36
+  C:0047H         LINE#         38
+  C:0048H         LINE#         39
+  C:0049H         LINE#         40
+  C:004CH         LINE#         41
+  C:004DH         LINE#         42
+  C:0050H         LINE#         43
+  C:0052H         LINE#         44
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  04/27/2018  22:30:40  PAGE 2
+
+
+  C:0053H         LINE#         45
+  C:0054H         LINE#         46
+  -------         ENDMOD        DYNAMIC
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 002BH BYTE ( 2%) *
+******************************************************************************
+
+Program Size: data=8.0 xdata=0 code=85
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

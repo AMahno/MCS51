@@ -1,0 +1,3 @@
+".\Objects\dynamic.obj" 
+TO ".\Objects\playground" 
+PRINT(".\Listings\playground.m51")
