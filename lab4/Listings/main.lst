@@ -1,0 +1,58 @@
+A51 MACRO ASSEMBLER  MAIN                                                                 05/14/2018 23:36:28 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\main.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE main.a51 SET(SMALL) DEBUG PRINT(.\Listings\main.lst) OBJECT(.\Objects\m
+                      ain.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 0h
+0000 7400              2     mov a, #0
+0002 90A000            3     mov dptr, #0A000h
+0005 F0                4     movx @dptr, a
+0006 758920            5     mov TMOD, #20h
+0009 758DFA            6     mov TH1, #-6h
+000C 759850            7     mov SCON, #50h
+000F D28E              8     setb TR1
+                       9     
+                      10     
+                      11     
+                      12     
+                      13     
+                      14     
+                      15     
+                      16     
+                      17     
+                      18     
+                      19     
+                      20     
+                      21     
+0011 759941           22     again: mov SBUF, #"A"
+0014 3099FD           23     here: jnb TI, here
+0017 C299             24     clr TI
+0019 80F6             25     sjmp again
+                      26     end
+A51 MACRO ASSEMBLER  MAIN                                                                 05/14/2018 23:36:28 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+AGAIN. . . . . . .  C ADDR   0011H   A   
+HERE . . . . . . .  C ADDR   0014H   A   
+SBUF . . . . . . .  D ADDR   0099H   A   
+SCON . . . . . . .  D ADDR   0098H   A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TI . . . . . . . .  B ADDR   0098H.1 A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

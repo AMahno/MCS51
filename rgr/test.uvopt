@@ -26,7 +26,7 @@
     <ToolsetNumber>0x0</ToolsetNumber>
     <ToolsetName>MCS-51</ToolsetName>
     <TargetOption>
-      <CLK51>12000000</CLK51>
+      <CLK51>25000000</CLK51>
       <OPTTT>
         <gFlags>1</gFlags>
         <BeepAtEnd>1</BeepAtEnd>
@@ -77,22 +77,27 @@
         <tvExpOptDlg>0</tvExpOptDlg>
         <IsCurrentTarget>1</IsCurrentTarget>
       </OPTFL>
-      <CpuCode>255</CpuCode>
+      <CpuCode>3</CpuCode>
       <Books>
         <Book>
           <Number>0</Number>
-          <Title>8051 Instruction Set Manual</Title>
-          <Path>DATASHTS\INTEL\ISM51.PDF</Path>
+          <Title>Datasheet</Title>
+          <Path>DATASHTS\SiLabs\EFM8SB1\EFM8SB1_DATASHEET.PDF</Path>
         </Book>
         <Book>
           <Number>1</Number>
-          <Title>Data Sheet</Title>
-          <Path>DATASHTS\INTEL\80X1BH_87C51_DS.PDF</Path>
+          <Title>User Manual</Title>
+          <Path>DATASHTS\SiLabs\EFM8SB1\EFM8SB1-RM.PDF</Path>
+        </Book>
+        <Book>
+          <Number>2</Number>
+          <Title>Errata</Title>
+          <Path>DATASHTS\SiLabs\EFM8SB1\EFM8SB1-RevB-Errata.pdf</Path>
         </Book>
       </Books>
       <DebugOpt>
-        <uSim>1</uSim>
-        <uTrg>0</uTrg>
+        <uSim>0</uSim>
+        <uTrg>1</uTrg>
         <sLdApp>1</sLdApp>
         <sGomain>1</sGomain>
         <sRbreak>1</sRbreak>
@@ -115,7 +120,7 @@
         <bEvRecOn>1</bEvRecOn>
         <bSchkAxf>0</bSchkAxf>
         <bTchkAxf>0</bTchkAxf>
-        <nTsel>-1</nTsel>
+        <nTsel>10</nTsel>
         <sDll></sDll>
         <sDllPa></sDllPa>
         <sDlgDll></sDlgDll>
@@ -126,40 +131,28 @@
         <tDlgDll></tDlgDll>
         <tDlgPa></tDlgPa>
         <tIfile></tIfile>
-        <pMon></pMon>
+        <pMon>BIN\SiC8051F.dll</pMon>
       </DebugOpt>
       <TargetDriverDllRegistry>
         <SetRegEntry>
           <Number>0</Number>
-          <Key>DLGDP51</Key>
-          <Name>(98=-1,-1,-1,-1,0)(82=-1,-1,-1,-1,0)(83=-1,-1,-1,-1,0)(84=-1,-1,-1,-1,0)(85=-1,-1,-1,-1,0)(80=-1,-1,-1,-1,0)(91=791,209,1001,484,1)(92=-1,-1,-1,-1,0)</Name>
+          <Key>DLGTCYG</Key>
+          <Name></Name>
+        </SetRegEntry>
+        <SetRegEntry>
+          <Number>0</Number>
+          <Key>SiC8051F</Key>
+          <Name>-S27 -B115200 -O1793 -J0 -K0 -L0 -M0 -A2 -P1 -T0 -U</Name>
         </SetRegEntry>
       </TargetDriverDllRegistry>
-      <Breakpoint>
-        <Bp>
-          <Number>0</Number>
-          <Type>0</Type>
-          <LineNumber>32</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>-16777153</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>dynamic.a51</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\playground\DYNAMIC\32</Expression>
-        </Bp>
-      </Breakpoint>
+      <Breakpoint/>
       <Tracepoint>
         <THDelay>0</THDelay>
       </Tracepoint>
       <DebugFlag>
         <trace>0</trace>
         <periodic>1</periodic>
-        <aLwin>1</aLwin>
+        <aLwin>0</aLwin>
         <aCover>0</aCover>
         <aSer1>0</aSer1>
         <aSer2>0</aSer2>
@@ -211,8 +204,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\dynamic.a51</PathWithFileName>
-      <FilenameWithoutPath>dynamic.a51</FilenameWithoutPath>
+      <PathWithFileName>.\SILABS_STARTUP.A51</PathWithFileName>
+      <FilenameWithoutPath>SILABS_STARTUP.A51</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

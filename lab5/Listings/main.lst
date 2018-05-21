@@ -1,0 +1,79 @@
+A51 MACRO ASSEMBLER  MAIN                                                                 05/15/2018 12:38:10 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\main.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE main.a51 SET(SMALL) DEBUG PRINT(.\Listings\main.lst) OBJECT(.\Objects\m
+                      ain.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1             org 0h
+                       2             
+                       3     
+                       4     
+                       5     
+                       6     
+                       7     
+                       8     
+                       9     
+                      10     
+                      11     
+                      12     
+                      13     
+                      14     
+                      15     
+                      16     
+                      17     
+                      18     
+                      19     
+                      20     
+                      21     
+                      22     
+                      23     
+                      24     
+0000                  25     loop:
+0000 309702           26             jnb p1.7, comp
+0003 800E             27             jmp no_comp
+0005                  28             comp:
+                      29             
+0005 7CFF             30             mov R4,#0ffh
+0007 7AFF             31             C2: mov R2,#0FFh
+0009 DAFE             32             C3: djnz R2, C3
+000B DCFA             33             djnz R4, C2 
+                      34             
+000D 90B000           35             mov DPTR, #0B000h
+0010 F0               36             movx @dptr, a
+0011 7400             37             mov a, #0h
+                      38                     
+0013                  39             no_comp:
+0013 04               40             inc a
+0014 90F000           41             mov DPTR, #0F000h
+0017 F0               42             movx @DPTR, a
+                      43             
+0018 7CFF             44             mov R4,#0ffh
+001A DCFE             45             c4: djnz R4, C4 
+                      46             
+001C 80E2             47             jmp loop
+                      48             end
+A51 MACRO ASSEMBLER  MAIN                                                                 05/15/2018 12:38:10 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+C2 . . . . . . . .  C ADDR   0007H   A   
+C3 . . . . . . . .  C ADDR   0009H   A   
+C4 . . . . . . . .  C ADDR   001AH   A   
+COMP . . . . . . .  C ADDR   0005H   A   
+LOOP . . . . . . .  C ADDR   0000H   A   
+NO_COMP. . . . . .  C ADDR   0013H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

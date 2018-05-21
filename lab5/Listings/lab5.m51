@@ -1,0 +1,61 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    05/15/2018  12:38:10  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\main.obj TO .\Objects\lab5 PRINT (.\Listings\lab5.m51)
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\main.obj (MAIN)
+
+
+LINK MAP OF MODULE:  .\Objects\lab5 (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     001EH     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\lab5 (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0007H         SYMBOL        C2
+  C:0009H         SYMBOL        C3
+  C:001AH         SYMBOL        C4
+  C:0005H         SYMBOL        COMP
+  C:0000H         SYMBOL        LOOP
+  C:0013H         SYMBOL        NO_COMP
+  D:0090H         SYMBOL        P1
+  C:0000H         LINE#         26
+  C:0003H         LINE#         27
+  C:0005H         LINE#         30
+  C:0007H         LINE#         31
+  C:0009H         LINE#         32
+  C:000BH         LINE#         33
+  C:000DH         LINE#         35
+  C:0010H         LINE#         36
+  C:0011H         LINE#         37
+  C:0013H         LINE#         40
+  C:0014H         LINE#         41
+  C:0017H         LINE#         42
+  C:0018H         LINE#         44
+  C:001AH         LINE#         45
+  C:001CH         LINE#         47
+  -------         ENDMOD        MAIN
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 001EH BYTE ( 1%) *
+******************************************************************************
+
+Program Size: data=8.0 xdata=0 code=30
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

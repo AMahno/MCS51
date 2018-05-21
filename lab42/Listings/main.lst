@@ -1,0 +1,163 @@
+A51 MACRO ASSEMBLER  MAIN                                                                 05/14/2018 23:47:44 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\main.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE main.a51 SET(SMALL) DEBUG PRINT(.\Listings\main.lst) OBJECT(.\Objects\m
+                      ain.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1             org 0h
+0000 020100            2             ljmp begin
+                       3     
+0003                   4             org 0003h
+0003 3140              5             call isr
+0005 32                6             reti
+                       7     
+0030                   8             org 30h
+0030 0E040404          9             one: db 0Eh, 4h, 4h, 4h, 4h, 0Ch, 4h
+0034 040C04                  
+                      10             
+0037 1E100804         11             two: db 1Eh, 10h, 8h, 4h, 2h, 12h, 0Ch
+003B 02120C                  
+                      12             
+003E 0E010106         13             three: db 0Eh, 1h, 1h, 6h, 2h, 1h, 0Eh
+0042 02010E                  
+                      14             
+0045 0202021F         15             four: db 2h, 2h, 2h, 1Fh, 0Ah, 4h, 2h
+0049 0A0402                  
+                      16             
+004C 0E010101         17             five: db 0Eh, 1h, 1h, 1h, 0Eh, 8h, 0Fh
+0050 0E080F                  
+                      18             
+0053 0C12121C         19             six: db 0Ch, 12h, 12h, 1Ch, 10h, 10h, 0Eh
+0057 10100E                  
+                      20             
+005A 08081C08         21             seven: db 8h, 8h, 1Ch, 8h, 4h, 2h, 1Eh
+005E 04021E                  
+                      22             
+0061 0E11110E         23             eight: db 0Eh, 11h, 11h, 0Eh, 11h, 11h, 0Eh
+0065 11110E                  
+                      24             
+0068 1E01010F         25             nine: db 1Eh, 1h, 1h, 0Fh, 11h, 11h, 0Eh
+006C 11110E                  
+006F 0E111111         26             zero: db 0Eh, 11h, 11h, 11h, 11h, 11h, 0Eh
+0073 11110E                  
+0100                  27             org 100h
+0100                  28     begin:
+                      29             
+0100 C2AF             30             clr ea
+0102 C28E             31             clr tr1
+0104 758911           32             mov TMOD, #00010001b
+0107 758841           33             mov TCON, #01000001b
+010A D2AF             34             setb ea
+010C D2A8             35             setb ex0
+                      36             
+                      37             
+010E D28C             38             setb TR0
+                      39     
+0110 7C00             40             mov r4, #0h
+                      41     
+0112                  42     outer_loop:
+                      43     
+0112 7807             44             mov r0, #7
+0114 7901             45             mov r1, #1
+0116 7A00             46             mov r2, #0
+                      47             
+A51 MACRO ASSEMBLER  MAIN                                                                 05/14/2018 23:47:44 PAGE     2
+
+0118                  48             loop:
+0118 EC               49             mov a, r4
+0119 75F007           50             mov b, #7h
+011C A4               51             mul ab
+011D 2A               52             add a, r2
+                      53             
+011E 90A000           54             mov dptr, #0A000h
+0121 F0               55             movx @dptr, a
+                      56             
+0122 900030           57             mov dptr, #30h
+0125 93               58             movc a, @a+dptr
+0126 0A               59             inc r2
+                      60             
+0127 908000           61             mov dptr, #8000h
+012A F0               62             movx @dptr, a
+                      63             
+012B E9               64             mov a, r1
+012C F4               65             cpl a
+012D 908002           66             mov dptr, #8002h
+0130 F0               67             movx @dptr, a
+0131 F4               68             cpl a
+0132 23               69             rl a
+0133 F9               70             mov r1, a
+                      71     
+0134 758CFE           72             mov TH0, #0FEh
+0137 308DFD           73             wait: jnb TF0, wait
+013A C28D             74             clr TF0
+                      75     
+013C D8DA             76             djnz r0, loop
+                      77                     
+013E 80D2             78             jmp outer_loop
+                      79             
+                      80             
+0140                  81             isr:
+0140 FF               82             mov r7, a
+                      83             
+0141 D28E             84             setb TR1
+0143 308FFD           85             debounce: jnb TF1, debounce
+                      86             
+0146 EC               87             mov a, r4
+0147 6409             88             xrl a, #9h
+0149 6002             89             jz equals
+014B 8002             90             jmp not_equals
+014D                  91             equals:
+014D 7CFF             92             mov r4, #-1h
+014F                  93             not_equals:
+014F 0C               94             inc r4
+                      95             
+                      96             
+0150 EF               97             mov a, r7
+0151 22               98             ret
+                      99     end
+A51 MACRO ASSEMBLER  MAIN                                                                 05/14/2018 23:47:44 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+BEGIN. . . . . . .  C ADDR   0100H   A   
+DEBOUNCE . . . . .  C ADDR   0143H   A   
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+EIGHT. . . . . . .  C ADDR   0061H   A   
+EQUALS . . . . . .  C ADDR   014DH   A   
+EX0. . . . . . . .  B ADDR   00A8H.0 A   
+FIVE . . . . . . .  C ADDR   004CH   A   
+FOUR . . . . . . .  C ADDR   0045H   A   
+ISR. . . . . . . .  C ADDR   0140H   A   
+LOOP . . . . . . .  C ADDR   0118H   A   
+NINE . . . . . . .  C ADDR   0068H   A   
+NOT_EQUALS . . . .  C ADDR   014FH   A   
+ONE. . . . . . . .  C ADDR   0030H   A   
+OUTER_LOOP . . . .  C ADDR   0112H   A   
+SEVEN. . . . . . .  C ADDR   005AH   A   
+SIX. . . . . . . .  C ADDR   0053H   A   
+TCON . . . . . . .  D ADDR   0088H   A   
+TF0. . . . . . . .  B ADDR   0088H.5 A   
+TF1. . . . . . . .  B ADDR   0088H.7 A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+THREE. . . . . . .  C ADDR   003EH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+TWO. . . . . . . .  C ADDR   0037H   A   
+WAIT . . . . . . .  C ADDR   0137H   A   
+ZERO . . . . . . .  C ADDR   006FH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
