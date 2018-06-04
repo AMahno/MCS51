@@ -6,7 +6,6 @@
 	reti
 	
 	org 30h
-	row: db 10h
 begin:
 	clr ea
 	clr tr1
@@ -49,10 +48,6 @@ row3:
 	jmp poll_kb
 
 det_but_1:
-	clr a
-	mov dptr, #row
-	movc a, @a+dptr
-	mov r3, a
 	mov a, r2
 
 key1:
@@ -77,11 +72,6 @@ key_star:
 	jmp poll_kb
 
 det_but_2:
-	clr a
-	mov dptr, #row
-	movc a, @a+dptr
-	rr a
-	mov r3, a
 	mov a, r2
 
 key2:
@@ -106,12 +96,6 @@ key0:
 	jmp poll_kb
 
 det_but_3:
-	clr a
-	mov dptr, #row
-	movc a, @a+dptr
-	rr a
-	rr a
-	mov r3, a
 	mov a, r2
 
 key3:

@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  MAIN                                                                 04/27/2018 23:04:16 PAGE     1
+A51 MACRO ASSEMBLER  MAIN                                                                 06/04/2018 22:58:03 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.2.7.0
@@ -9,193 +9,177 @@ ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE main.a51 SET(SMALL) DEBUG PRINT
 LOC  OBJ            LINE     SOURCE
 
 0000                   1             org 0h
-0000 020031            2             ljmp begin
+0000 020030            2             ljmp begin
                        3             
 001B                   4             org 001Bh
-001B 3103              5             call isr
+001B 11ED              5             call isr
 001D 32                6             reti
                        7             
 0030                   8             org 30h
-0030 10                9             row: db 10h
-0031                  10     begin:
-0031 C2AF             11             clr ea
-0033 C28E             12             clr tr1
-0035 758911           13             mov TMOD, #00010001b
-0038 758841           14             mov TCON, #01000001b
-003B D2AF             15             setb ea
-003D D2AB             16             setb et1
-003F D28E             17             setb tr1
+0030                   9     begin:
+0030 C2AF             10             clr ea
+0032 C28E             11             clr tr1
+0034 758911           12             mov TMOD, #00010001b
+0037 758841           13             mov TCON, #01000001b
+003A D2AF             14             setb ea
+003C D2AB             15             setb et1
+003E D28E             16             setb tr1
+                      17     
                       18     
-                      19     
-0041                  20     poll_kb:
-0041 909006           21             mov dptr, #09006h ;first row
-0044 E0               22             movx a, @dptr
-0045 FA               23             mov r2, a
-0046 11FA             24             call test
-0048 6006             25             jz row2
-004A 11EA             26             call debounce
-004C 11FA             27             call test
-004E 7020             28             jnz det_but_1
-                      29             
-0050                  30     row2:
-0050 909005           31             mov dptr, #09005h
-0053 E0               32             movx a, @dptr
-0054 FA               33             mov r2, a
-0055 11FA             34             call test
-0057 6006             35             jz row3
-0059 11EA             36             call debounce
-005B 11FA             37             call test
-005D 7036             38             jnz det_but_2
-                      39             
-005F                  40     row3:
-005F 909003           41             mov dptr, #09003h
-0062 E0               42             movx a, @dptr
-0063 FA               43             mov r2, a
-0064 11FA             44             call test
-0066 60D9             45             jz poll_kb
-0068 11EA             46             call debounce
-006A 11FA             47             call test
-006C 704D             48             jnz det_but_3
-006E 80D1             49             jmp poll_kb
-                      50     
-0070                  51     det_but_1:
-0070 E4               52             clr a
-0071 900030           53             mov dptr, #row
-0074 93               54             movc a, @a+dptr
-0075 FB               55             mov r3, a
-0076 EA               56             mov a, r2
-                      57     
-A51 MACRO ASSEMBLER  MAIN                                                                 04/27/2018 23:04:16 PAGE     2
+0040                  19     poll_kb:
+0040 909006           20             mov dptr, #09006h ;first row
+0043 E0               21             movx a, @dptr
+0044 FA               22             mov r2, a
+0045 11E4             23             call test
+0047 6006             24             jz row2
+0049 11D4             25             call debounce
+004B 11E4             26             call test
+004D 7020             27             jnz det_but_1
+                      28             
+004F                  29     row2:
+004F 909005           30             mov dptr, #09005h
+0052 E0               31             movx a, @dptr
+0053 FA               32             mov r2, a
+0054 11E4             33             call test
+0056 6006             34             jz row3
+0058 11D4             35             call debounce
+005A 11E4             36             call test
+005C 7030             37             jnz det_but_2
+                      38             
+005E                  39     row3:
+005E 909003           40             mov dptr, #09003h
+0061 E0               41             movx a, @dptr
+0062 FA               42             mov r2, a
+0063 11E4             43             call test
+0065 60D9             44             jz poll_kb
+0067 11D4             45             call debounce
+0069 11E4             46             call test
+006B 7040             47             jnz det_but_3
+006D 80D1             48             jmp poll_kb
+                      49     
+006F                  50     det_but_1:
+006F EA               51             mov a, r2
+                      52     
+0070                  53     key1:
+0070 B4FE04           54             cjne a, #0FEh, key4
+0073 7F06             55             mov r7, #06h
+0075 11CC             56             call out
+                      57             
+A51 MACRO ASSEMBLER  MAIN                                                                 06/04/2018 22:58:03 PAGE     2
 
-0077                  58     key1:
-0077 B4FE04           59             cjne a, #0FEh, key4
-007A 7F06             60             mov r7, #06h
-007C 11E2             61             call out
+0077                  58     key4:
+0077 B4FD04           59             cjne a, #0FDh, key7
+007A 7F66             60             mov r7, #66h
+007C 11CC             61             call out
                       62             
-007E                  63     key4:
-007E B4FD04           64             cjne a, #0FDh, key7
-0081 7F66             65             mov r7, #66h
-0083 11E2             66             call out
-                      67             
-0085                  68     key7:
-0085 B4FB04           69             cjne a, #0FBh, key_star
-0088 7F07             70             mov r7, #07h
-008A 11E2             71             call out
-                      72     
-008C                  73     key_star:
-008C B4F7C1           74             cjne a, #0F7h, row2
-008F 7F71             75             mov r7, #71h
-0091 11E2             76             call out
-0093 80AC             77             jmp poll_kb
-                      78     
-0095                  79     det_but_2:
-0095 E4               80             clr a
-0096 900030           81             mov dptr, #row
-0099 93               82             movc a, @a+dptr
-009A 03               83             rr a
-009B FB               84             mov r3, a
-009C EA               85             mov a, r2
-                      86     
-009D                  87     key2:
-009D B4FE04           88             cjne a, #0FEh, key5
-00A0 7F5B             89             mov r7, #5Bh
-00A2 11E2             90             call out
-                      91             
-00A4                  92     key5:
-00A4 B4FD04           93             cjne a, #0FDh, key8
-00A7 7F6D             94             mov r7, #6Dh
-00A9 11E2             95             call out
-                      96             
-00AB                  97     key8:
-00AB B4FB04           98             cjne a, #0FBh, key0
-00AE 7F7F             99             mov r7, #7Fh
-00B0 11E2            100             call out
-                     101     
-00B2                 102     key0:
-00B2 B4F79B          103             cjne a, #0F7h, row2
-00B5 7F3F            104             mov r7, #3Fh
-00B7 11E2            105             call out
-00B9 8086            106             jmp poll_kb
-                     107     
-00BB                 108     det_but_3:
-00BB E4              109             clr a
-00BC 900030          110             mov dptr, #row
-00BF 93              111             movc a, @a+dptr
-00C0 03              112             rr a
-00C1 03              113             rr a
-00C2 FB              114             mov r3, a
-00C3 EA              115             mov a, r2
-                     116     
-00C4                 117     key3:
-00C4 B4FE04          118             cjne a, #0FEh, key6
-00C7 7F4F            119             mov r7, #4Fh
-00C9 11E2            120             call out
-                     121             
-00CB                 122     key6:
-00CB B4FD04          123             cjne a, #0FDh, key9
-A51 MACRO ASSEMBLER  MAIN                                                                 04/27/2018 23:04:16 PAGE     3
+007E                  63     key7:
+007E B4FB04           64             cjne a, #0FBh, key_star
+0081 7F07             65             mov r7, #07h
+0083 11CC             66             call out
+                      67     
+0085                  68     key_star:
+0085 B4F7C7           69             cjne a, #0F7h, row2
+0088 7F71             70             mov r7, #71h
+008A 11CC             71             call out
+008C 80B2             72             jmp poll_kb
+                      73     
+008E                  74     det_but_2:
+008E EA               75             mov a, r2
+                      76     
+008F                  77     key2:
+008F B4FE04           78             cjne a, #0FEh, key5
+0092 7F5B             79             mov r7, #5Bh
+0094 11CC             80             call out
+                      81             
+0096                  82     key5:
+0096 B4FD04           83             cjne a, #0FDh, key8
+0099 7F6D             84             mov r7, #6Dh
+009B 11CC             85             call out
+                      86             
+009D                  87     key8:
+009D B4FB04           88             cjne a, #0FBh, key0
+00A0 7F7F             89             mov r7, #7Fh
+00A2 11CC             90             call out
+                      91     
+00A4                  92     key0:
+00A4 B4F7A8           93             cjne a, #0F7h, row2
+00A7 7F3F             94             mov r7, #3Fh
+00A9 11CC             95             call out
+00AB 8093             96             jmp poll_kb
+                      97     
+00AD                  98     det_but_3:
+00AD EA               99             mov a, r2
+                     100     
+00AE                 101     key3:
+00AE B4FE04          102             cjne a, #0FEh, key6
+00B1 7F4F            103             mov r7, #4Fh
+00B3 11CC            104             call out
+                     105             
+00B5                 106     key6:
+00B5 B4FD04          107             cjne a, #0FDh, key9
+00B8 7F7D            108             mov r7, #7Dh
+00BA 11CC            109             call out
+                     110             
+00BC                 111     key9:
+00BC B4FB04          112             cjne a, #0FBh, key_die
+00BF 7F6F            113             mov r7, #6Fh
+00C1 11CC            114             call out
+                     115     
+00C3                 116     key_die:
+00C3 B4F724          117             cjne a, #0F7h, proxy_row_2
+00C6 7F79            118             mov r7, #79h
+00C8 11CC            119             call out
+00CA 0140            120             jmp poll_kb
+                     121     
+00CC                 122     out:
+00CC F9              123             mov r1, a
+A51 MACRO ASSEMBLER  MAIN                                                                 06/04/2018 22:58:03 PAGE     3
 
-00CE 7F7D            124             mov r7, #7Dh
-00D0 11E2            125             call out
-                     126             
-00D2                 127     key9:
-00D2 B4FB04          128             cjne a, #0FBh, key_die
-00D5 7F6F            129             mov r7, #6Fh
-00D7 11E2            130             call out
-                     131     
-00D9                 132     key_die:
-00D9 B4F724          133             cjne a, #0F7h, proxy_row_2
-00DC 7F79            134             mov r7, #79h
-00DE 11E2            135             call out
-00E0 0141            136             jmp poll_kb
-                     137     
-00E2                 138     out:
-00E2 F9              139             mov r1, a
-00E3 EF              140             mov a, r7
-00E4 90A000          141             mov dptr, #0A000h
-00E7 F0              142             movx @dptr, a
-00E8 E9              143             mov a, r1
-00E9 22              144             ret
-                     145     
-00EA                 146     debounce:
-00EA 758CA0          147             mov TH0, #0A0h
-00ED 758A00          148             mov TL0, #00h
-00F0 D28C            149             setb TR0
-00F2                 150     wait:
-00F2 308DFD          151             jnb TF0, wait
-00F5 C28C            152             clr TR0
-00F7 C28D            153             clr TF0
-00F9 22              154             ret
-                     155             
-00FA                 156     test:
-00FA 44F0            157             orl a, #0F0h
-00FC F4              158             cpl a
-00FD 22              159             ret
-                     160             
-00FE 8018            161             jmp finish
-0100                 162             proxy_row_2:
-0100 020050          163             ljmp row2
-                     164             
-0103                 165             isr:
-0103 FD              166             mov r5, a
-0104 EE              167             mov a, r6
-0105 6404            168             xrl a, #4h
-0107 7002            169             jnz not_equals
-0109 7E00            170             mov r6, #0h
-010B                 171             not_equals:
-010B 0E              172             inc r6
-010C EE              173             mov a, r6
-010D 908002          174             mov dptr, #8002h
-0110 F0              175             movx @dptr, a
-0111 908001          176             mov dptr, #8001h
-0114 EF              177             mov a, r7
-0115 F0              178             movx @dptr, a
-0116 ED              179             mov a, r5
-0117 22              180             ret
-                     181             
-0118                 182             finish: 
-                     183     end
-A51 MACRO ASSEMBLER  MAIN                                                                 04/27/2018 23:04:16 PAGE     4
+00CD EF              124             mov a, r7
+00CE 90A000          125             mov dptr, #0A000h
+00D1 F0              126             movx @dptr, a
+00D2 E9              127             mov a, r1
+00D3 22              128             ret
+                     129     
+00D4                 130     debounce:
+00D4 758CA0          131             mov TH0, #0A0h
+00D7 758A00          132             mov TL0, #00h
+00DA D28C            133             setb TR0
+00DC                 134     wait:
+00DC 308DFD          135             jnb TF0, wait
+00DF C28C            136             clr TR0
+00E1 C28D            137             clr TF0
+00E3 22              138             ret
+                     139             
+00E4                 140     test:
+00E4 44F0            141             orl a, #0F0h
+00E6 F4              142             cpl a
+00E7 22              143             ret
+                     144             
+00E8 8018            145             jmp finish
+00EA                 146             proxy_row_2:
+00EA 02004F          147             ljmp row2
+                     148             
+00ED                 149             isr:
+00ED FD              150             mov r5, a
+00EE EE              151             mov a, r6
+00EF 6404            152             xrl a, #4h
+00F1 7002            153             jnz not_equals
+00F3 7E00            154             mov r6, #0h
+00F5                 155             not_equals:
+00F5 0E              156             inc r6
+00F6 EE              157             mov a, r6
+00F7 908002          158             mov dptr, #8002h
+00FA F0              159             movx @dptr, a
+00FB 908001          160             mov dptr, #8001h
+00FE EF              161             mov a, r7
+00FF F0              162             movx @dptr, a
+0100 ED              163             mov a, r5
+0101 22              164             ret
+                     165             
+0102                 166             finish: 
+                     167     end
+A51 MACRO ASSEMBLER  MAIN                                                                 06/04/2018 22:58:03 PAGE     4
 
 SYMBOL TABLE LISTING
 ------ ----- -------
@@ -203,43 +187,42 @@ SYMBOL TABLE LISTING
 
 N A M E             T Y P E  V A L U E   ATTRIBUTES
 
-BEGIN. . . . . . .  C ADDR   0031H   A   
-DEBOUNCE . . . . .  C ADDR   00EAH   A   
-DET_BUT_1. . . . .  C ADDR   0070H   A   
-DET_BUT_2. . . . .  C ADDR   0095H   A   
-DET_BUT_3. . . . .  C ADDR   00BBH   A   
+BEGIN. . . . . . .  C ADDR   0030H   A   
+DEBOUNCE . . . . .  C ADDR   00D4H   A   
+DET_BUT_1. . . . .  C ADDR   006FH   A   
+DET_BUT_2. . . . .  C ADDR   008EH   A   
+DET_BUT_3. . . . .  C ADDR   00ADH   A   
 EA . . . . . . . .  B ADDR   00A8H.7 A   
 ET1. . . . . . . .  B ADDR   00A8H.3 A   
-FINISH . . . . . .  C ADDR   0118H   A   
-ISR. . . . . . . .  C ADDR   0103H   A   
-KEY0 . . . . . . .  C ADDR   00B2H   A   
-KEY1 . . . . . . .  C ADDR   0077H   A   
-KEY2 . . . . . . .  C ADDR   009DH   A   
-KEY3 . . . . . . .  C ADDR   00C4H   A   
-KEY4 . . . . . . .  C ADDR   007EH   A   
-KEY5 . . . . . . .  C ADDR   00A4H   A   
-KEY6 . . . . . . .  C ADDR   00CBH   A   
-KEY7 . . . . . . .  C ADDR   0085H   A   
-KEY8 . . . . . . .  C ADDR   00ABH   A   
-KEY9 . . . . . . .  C ADDR   00D2H   A   
-KEY_DIE. . . . . .  C ADDR   00D9H   A   
-KEY_STAR . . . . .  C ADDR   008CH   A   
-NOT_EQUALS . . . .  C ADDR   010BH   A   
-OUT. . . . . . . .  C ADDR   00E2H   A   
-POLL_KB. . . . . .  C ADDR   0041H   A   
-PROXY_ROW_2. . . .  C ADDR   0100H   A   
-ROW. . . . . . . .  C ADDR   0030H   A   
-ROW2 . . . . . . .  C ADDR   0050H   A   
-ROW3 . . . . . . .  C ADDR   005FH   A   
+FINISH . . . . . .  C ADDR   0102H   A   
+ISR. . . . . . . .  C ADDR   00EDH   A   
+KEY0 . . . . . . .  C ADDR   00A4H   A   
+KEY1 . . . . . . .  C ADDR   0070H   A   
+KEY2 . . . . . . .  C ADDR   008FH   A   
+KEY3 . . . . . . .  C ADDR   00AEH   A   
+KEY4 . . . . . . .  C ADDR   0077H   A   
+KEY5 . . . . . . .  C ADDR   0096H   A   
+KEY6 . . . . . . .  C ADDR   00B5H   A   
+KEY7 . . . . . . .  C ADDR   007EH   A   
+KEY8 . . . . . . .  C ADDR   009DH   A   
+KEY9 . . . . . . .  C ADDR   00BCH   A   
+KEY_DIE. . . . . .  C ADDR   00C3H   A   
+KEY_STAR . . . . .  C ADDR   0085H   A   
+NOT_EQUALS . . . .  C ADDR   00F5H   A   
+OUT. . . . . . . .  C ADDR   00CCH   A   
+POLL_KB. . . . . .  C ADDR   0040H   A   
+PROXY_ROW_2. . . .  C ADDR   00EAH   A   
+ROW2 . . . . . . .  C ADDR   004FH   A   
+ROW3 . . . . . . .  C ADDR   005EH   A   
 TCON . . . . . . .  D ADDR   0088H   A   
-TEST . . . . . . .  C ADDR   00FAH   A   
+TEST . . . . . . .  C ADDR   00E4H   A   
 TF0. . . . . . . .  B ADDR   0088H.5 A   
 TH0. . . . . . . .  D ADDR   008CH   A   
 TL0. . . . . . . .  D ADDR   008AH   A   
 TMOD . . . . . . .  D ADDR   0089H   A   
 TR0. . . . . . . .  B ADDR   0088H.4 A   
 TR1. . . . . . . .  B ADDR   0088H.6 A   
-WAIT . . . . . . .  C ADDR   00F2H   A   
+WAIT . . . . . . .  C ADDR   00DCH   A   
 
 
 REGISTER BANK(S) USED: 0 
